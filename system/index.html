@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+	<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<meta charset="utf-8">
+	<title>flower</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>	
+	<div id="style-btn-row">
+		<button type="button" class="btn btn-default"  style="width:10%" onclick="setStyle(0)">
+			<img data-index="0" class="img-responsive" src="btn-img/color1.png"/>
+		</button>
+		<button type="button" class="btn btn-default"  style="width:10%" onclick="setStyle(1)">
+			<img data-index="1" class="img-responsive" src="btn-img/color2.png"/>
+		</button>
+		<button type="button" class="btn btn-default"  style="width:10%" onclick="setStyle(2)">
+			<img data-index="2" class="img-responsive" src="btn-img/color3.png"/>
+		</button>
+		<button type="button" class="btn btn-default"  style="width:10%" onclick="setStyle(3)">
+			<img data-index="3" class="img-responsive" src="btn-img/color4.png"/>
+		</button>
+		<button type="button" class="btn btn-default"  style="width:10%" onclick="setStyle(4)">
+			<img data-index="4" class="img-responsive" src="btn-img/color5.png"/>
+		</button>
+	</div>
+	<div id="tools">
+		<button type="button" class="btn btn-default"  style="width:10%" onclick="setFront()">
+			<img class="img-responsive" src="btn-img/draw-front.jpg"/>
+		</button>
+		<button type="button" class="btn btn-default"  style="width:10%" onclick="setSide()">
+			<img class="img-responsive" src="btn-img/draw-side.jpg"/>
+		</button>
+		<button type="button" class="btn btn-default"  style="width:10%" onclick="setLeaf()">
+			<img class="img-responsive" src="btn-img/draw-leaf.jpg"/>
+		</button>
+		<button type="button" class="btn btn-default"  style="width:8%" onclick="downloadSVG()">
+			<img class="img-responsive" src="btn-img/download-2-xxl.png"/>
+			
+		</button>
+		<button type="button" class="btn btn-default" style="width:8%" onclick="uploadJSON()">
+			<img class="img-responsive" src="btn-img/upload-3-256.jpg"/>
+			<input type="file" id="file-input" style="display: none;">
+		</button>
+		<button type="button" class="btn btn-default" style="width:8%" onclick="SendLinkByMail()">
+			<img class="img-responsive" src="btn-img/message-256.jpg"/>
+		</button>
+	<div id="drawing"></div>
+</div>
+</body>
+
+<script src="js/main.js"></script>
+<script>
+function setStyle(styleIndex) {
+	window['changeColorByIndex'](styleIndex);
+}
+
+function setSide() {
+	window['setSideFlowerState']();
+}
+
+function setLeaf() {
+	window['setLeafState']();
+}
+
+function setFront() {
+	window['setFrontFlowerState']();
+}
+function downloadSVG() {
+	window['download']();
+}
+
+function SendLinkByMail(href) {
+	var subject= '海石榴華';
+
+	let svg = document.getElementsByTagName('svg')[0];
+
+	var uri = 'mailto:?subject=';
+	uri += encodeURIComponent(subject);
+	uri += '&Content-Type=text/html; charset=utf-8';
+	uri += '&body=';
+	uri +=encodeURIComponent(svg.outerHTML);
+	window.location.href = uri;
+}
+
+function uploadJSON(){
+	document.getElementById('file-input').click();
+}
+</script>
+</html>
